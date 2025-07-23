@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "title": "Ranjit Singh Maharaj Of Punjab By Khushwant Singh (Gurmatveechar Com)",
+        "path": "../books/Ranjit.Singh.Maharaj.of.Punjab.by.Khushwant.Singh.(GurmatVeechar.com).pdf",
+        "language": "",
+        "author": null,
+        "thumbnail": "../books/thumbnail/Ranjit.Singh.Maharaj.of.Punjab.by.Khushwant.Singh.(GurmatVeechar.com).png"
+    },
+    {
+        "id": 1,
+        "title": "The Jungle Books Text",
+        "path": "../books/The-Jungle-Books-text.pdf",
+        "language": "en",
+        "author": null,
+        "thumbnail": "../books/thumbnail/The-Jungle-Books-text.png"
+    },
+    {
+        "id": 2,
+        "title": "The Picture Of Dorian Gray",
+        "path": "../books/the-picture-of-dorian-gray.pdf",
+        "language": "en",
+        "author": "Oscar Wilde",
+        "thumbnail": "../books/thumbnail/the-picture-of-dorian-gray.png"
+    }
+]
