@@ -5,6 +5,8 @@
 		}
 	],
 	"settings": {
-		"typescript.validate.enable": true
+		"typescript.validate.enable": true,
+		"editor.formatOnType": true,
+		"terminal.integrated.gpuAcceleration": "off"
 	}
 }

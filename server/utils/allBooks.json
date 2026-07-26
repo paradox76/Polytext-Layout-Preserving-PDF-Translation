@@ -9,6 +9,14 @@
     },
     {
         "id": 1,
+        "title": "Shakespeare Complete Works",
+        "path": "../books/Shakespeare-Complete-Works.pdf",
+        "language": "en",
+        "author": null,
+        "thumbnail": "../books/thumbnail/Shakespeare-Complete-Works.png"
+    },
+    {
+        "id": 2,
         "title": "The Jungle Books Text",
         "path": "../books/The-Jungle-Books-text.pdf",
         "language": "en",
@@ -16,7 +24,7 @@
         "thumbnail": "../books/thumbnail/The-Jungle-Books-text.png"
     },
     {
-        "id": 2,
+        "id": 3,
         "title": "The Picture Of Dorian Gray",
         "path": "../books/the-picture-of-dorian-gray.pdf",
         "language": "en",

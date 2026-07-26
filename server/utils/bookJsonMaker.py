@@ -1,29 +1,35 @@
 import os
 import json
 import re
+import sys
 from langdetect import detect
 from PyPDF2 import PdfReader
 from pdf2image import convert_from_path
 
-folder_path = "../books"
-files = os.listdir(folder_path)
 
+folder_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'books')
+##print("Here is script path: ", folder_path)
 pdfs = []
+
 bookID = 0
 
+     
+
 def jsonUnitCreator(ff, id,path, lang, auth, thumb):
-    
+    relPath = os.path.relpath(path, "server")
+    thumbnail = os.path.relpath(thumb,"server")
+
     dic = {
         "id" : id,
         "title" : ff,
-        "path" : path,
+        "path" : relPath,
         "language": lang,
         "author": auth,
-        "thumbnail": thumb
+        "thumbnail": thumbnail
 
 
            }
-    print("book dict is: ", dic)
+   # print("book dict is: ", dic)
     return dic
 
 
@@ -53,30 +59,44 @@ def extractLangAuth(book, path):
 
 def thumber(file, folder):
      thumbfolder = os.path.join(folder, "thumbnail")
-     pic = convert_from_path(file, first_page=1, last_page=1, poppler_path=r"Release-24.08.0-0\poppler-24.08.0\Library\bin")
+     pic = convert_from_path(file, first_page=1, last_page=1, poppler_path= os.path.join(os.path.dirname(__file__),r"Release-24.08.0-0\poppler-24.08.0\Library\bin"))
+
+
      picPath = os.path.join(thumbfolder,os.path.splitext((os.path.split(file)[-1]))[0]+".png").replace("\\","/")
      pic[0].save(picPath, "PNG")
      return picPath 
 
-
-for f in files:
-    if ".pdf" in f.lower():
-        cleanf = (re.sub(r'[^a-zA-Z0-9()]',' ',f[0:-4])).title()
-        path = os.path.join(folder_path, f).replace("\\","/" )
-        langAuth = extractLangAuth(f, path)
-        language = langAuth[0]
-        author = langAuth[1]
-        thumbnail = thumber(path, folder_path)
-
-
-        """below is json creation above is all the key value creation essentially"""
-        pdf = jsonUnitCreator(cleanf,bookID, path, language, author, thumbnail)
-        pdfs.append(pdf)
-        bookID += 1
+def extractor():
+    global bookID
+    for f in files:
+        if ".pdf" in f.lower():
+            cleanf = (re.sub(r'[^a-zA-Z0-9()]',' ',f[0:-4])).title()
+            path = os.path.join(folder_path, f).replace("\\","/" )
+            langAuth = extractLangAuth(f, path)
+            language = langAuth[0]
+            author = langAuth[1]
+            thumbnail = thumber(path, folder_path)
 
 
-with open("allBooks.json", "w", encoding="utf-8") as qvason:
-     json.dump(pdfs,qvason, indent=4, ensure_ascii=False )
+            """below is json creation above is all the key value creation essentially"""
+            pdf = jsonUnitCreator(cleanf,bookID, path, language, author, thumbnail)
+            pdfs.append(pdf)
+            bookID += 1
+    print(json.dumps(pdfs))
+
+
+if len(sys.argv) >1 :
+     #folder_path = "./books"
+     files = [sys.argv[1]]
+else:
+     files = os.listdir(folder_path)
+
+extractor()
+
+
+
+# with open("allBooks.json", "w", encoding="utf-8") as qvason:
+#      json.dump(pdfs,qvason, indent=4, ensure_ascii=False )
      
 
 

@@ -6,9 +6,26 @@
 /* {
     outline: 1px solid red;
   }
-
 */
+.btn-primary {
+    background-color: oklch(0.72 0.13 195);
+    border-color: oklch(0.72 0.13 195);
+    color: oklch(0.14 0.02 255);
+    font-weight: 700;
+}
+.btn-primary:hover {
+    background-color: oklch(0.6 0.15 195);
+    border-color: oklch(0.6 0.15 195);
+}
+body {
+    background-color: oklch(0.18 0.02 255);
+    
+    box-sizing: border-box;
 
+}
+#searchInput::placeholder {
+    color: oklch(0.6 0.02 255);
+}
 .logo { border-color: blue;
     font-family: 'gabriola', sans-serif;
     color: aqua;

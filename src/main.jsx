@@ -5,15 +5,16 @@ import { StrictMode, useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../style.css";
 import { PDFDocument } from 'pdf-lib';
-
+import { BrowserRouter } from 'react-router-dom';
 /////////////////////////
 createRoot(document.getElementById('root')).render(
 
     <StrictMode>
-        <APP>
+<BrowserRouter>  
+<APP>
             
-        </APP>
-
+</APP>
+</BrowserRouter>
     </StrictMode>
 
 )
