@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext, createContext } from "react";
+import { useEffect, useState, createContext } from "react";
 import 'bootstrap';
-import NavBar, { TopNavBar, CardCreator, Footer, SortButton } from "./components";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { TopNavBar, CardCreator, Footer, SortButton } from "./components";
+import { Route, Routes} from "react-router-dom";
 import Reader from "./Reader.tsx";
 import Login from "./login.tsx";
 import AccPage, { AccInfo, BookMarkTab, Uploader } from "./AccPage.tsx";

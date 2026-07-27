@@ -32,3 +32,7 @@ server/testing/
 nul
 structure.txt
 server/books 
+structure.txt 
+git 
+"*.code-workspace" 
+Readme.txt 

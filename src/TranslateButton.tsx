@@ -1,6 +1,4 @@
 
-
-
 function TranslateButton({ name, others, setTrans }) {
     let translatedBuffer: ArrayBuffer;
     const transReqtoBack = ()=>{

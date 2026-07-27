@@ -3,12 +3,12 @@ import { authContext, LoginContext } from "./App";
 import { createPortal } from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { serverAddress } from "./App";
-import { error } from "pdf-lib";
+
 
 // the whole login component
 const Login = (propState: any) => {
     const curstate = useContext(LoginContext);
-    const { authStatus, setauthStatus } = useContext(authContext);
+    const {  setauthStatus } = useContext(authContext);
 
     const closeLog = propState.closeLogin;
 
