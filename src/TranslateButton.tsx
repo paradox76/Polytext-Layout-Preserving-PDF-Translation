@@ -6,7 +6,12 @@ function TranslateButton({ name, others, setTrans }) {
         
         const serviceChoice = (document.getElementById("trans"+name) as HTMLSelectElement).value;
         const languageChoice =(document.getElementById("lang"+name) as HTMLSelectElement).value;
-        const ogLanguage = (document.getElementById("from"+name) as HTMLSelectElement).value;
+        const ogLanguage = (document.getElementById("from" + name) as HTMLSelectElement).value;
+        
+        if (languageChoice === "Clear Translations") {
+            setTrans({ transVisible: false });
+            return;
+        }
 
         console.log(serviceChoice," and ", languageChoice,"\n",name," and others: ",others, ogLanguage);
         
@@ -39,37 +44,66 @@ function TranslateButton({ name, others, setTrans }) {
    
 
     };
+    return(<>
 
-return(<>
-
-<button onClick={transReqtoBack}> 
-    <select name="Translator" id={"trans"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required>
-        <optgroup label = "Service to use:">
-        <option>Google</option>
-        <option>LLM(AI)</option>
-        </optgroup>
-        </select>
-        Translate
-    <select name="From Language" id ={"from"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required >
-        <optgroup label ="Original Language:">
-        <option>Auto-detect</option>
-        <option>English</option> 
-        <option>Panjabi</option>
-        <option>Hindi</option>
-        </optgroup>
-        </select>    
-    <select name="To Language" id ={"lang"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required >
-        <optgroup label ="Language:">
-        <option>Clear Translations</option>
-        <option>English</option> 
-        <option>Panjabi</option>
-        <option>Hindi</option>
-        </optgroup>
-        </select>    
-    </button>
-
-
-</>);
+        <button onClick={transReqtoBack}> 
+            <select name="Translator" id={"trans"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required>
+                <optgroup label = "Service to use:">
+                <option>Google</option>
+                <option>LLM(AI)</option>
+                </optgroup>
+                </select>
+                Translate
+                <select name="From Language" id ={"from"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required defaultValue="auto">
+                <optgroup label ="Original Language:">
+                <option >Auto-detect</option>
+                <option value="en">English</option> 
+                <option value="pa">Panjabi</option>
+                <option value="hi">Hindi</option>
+                <option value="ar">Arabic</option>
+                <option value="ur">Urdu</option>
+                <option value="mr">Marathi</option>
+                <option value="ne">Nepali</option>
+                <option value="sa">Sanskrit</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="de">German</option>
+                <option value="pt">Portuguese</option>
+                <option value="it">Italian</option>
+                <option value="nl">Dutch</option>
+                <option value="pl">Polish</option>
+                <option value="sv">Swedish</option>
+                <option value="tr">Turkish</option>
+                <option value="ro">Romanian</option>
+                </optgroup>
+                </select>    
+            <select name="To Language" id ={"lang"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required defaultValue="pa">
+                <optgroup label ="Language:">
+                <option >Clear Translations</option>
+                <option value="en">English</option>
+                <option value="pa">Panjabi</option>
+                <option value="hi">Hindi</option>
+                <option value="ar">Arabic</option>
+                <option value="ur">Urdu</option>
+                <option value="mr">Marathi</option>
+                <option value="ne">Nepali</option>
+                <option value="sa">Sanskrit</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="de">German</option>
+                <option value="pt">Portuguese</option>
+                <option value="it">Italian</option>
+                <option value="nl">Dutch</option>
+                <option value="pl">Polish</option>
+                <option value="sv">Swedish</option>
+                <option value="tr">Turkish</option>
+                <option value="ro">Romanian</option>
+                </optgroup>
+                </select>
+            </button>
+        
+        
+        </>);
 
 }
 
