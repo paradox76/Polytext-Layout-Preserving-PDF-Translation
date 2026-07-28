@@ -10,7 +10,7 @@ Polytext is a full-stack web platform for reading and translating PDF books. Ope
 
 - **Translates entire pages while preserving the original layout** — the translated page looks like the book was printed in that language, not like text pasted into a side panel
 - **Handles scanned books** — image-based PDFs without any digital text layer are fully supported through a built-in OCR pipeline
-- **Multi-script support** — translate into languages across writing systems, including Punjabi, Hindi, and Arabic, with correct script rendering
+- **Multi-script support** — supports translation into any language via Gemini API, with dedicated font rendering for Punjabi, Hindi, Arabic, Urdu, Marathi, Nepali, and Sanskrit
 - **Interactive flipbook reader** — smooth page-turning reading experience in the browser
 - **Personal library** — browse the collection, filter by language, sort, and search
 - **Accounts and uploads** — secure signup/login, with an upload system that automatically extracts book metadata and generates cover thumbnails
