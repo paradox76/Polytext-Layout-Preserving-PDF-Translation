@@ -1,6 +1,6 @@
 # Polytext — Read Books in Any Language
 
-Polytext is a full-stack web platform for reading and translating PDF books. Open a book in the flipbook reader, pick a language, and read the same page — same layout, same structure — in the language of your choice. Works on both digital PDFs and scanned books.
+Polytext is a full-stack web platform for reading and translating PDF books. Open a book in the flipbook reader, pick a language, and read the same page in the language of your choice, with the same layout and structure preserved. Works on both digital PDFs and scanned books.
 
 **Live Demo:** [coming soon]
 
