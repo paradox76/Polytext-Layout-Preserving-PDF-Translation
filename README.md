@@ -80,7 +80,8 @@ PYTHON_PATH=path/to/virtual_venv/python
 GEMINI_API_KEY=your_key
 ```
 
-Create a PostgreSQL database named `polytext` with `users` and `books` tables.
+psql -U postgres -c "CREATE DATABASE polytext"
+psql -U postgres -d polytext -f schema.sql
 
 Start the backend:
 
