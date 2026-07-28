@@ -79,10 +79,10 @@ DB_PASSWORD=your_password
 PYTHON_PATH=path/to/virtual_venv/python
 GEMINI_API_KEY=your_key
 ```
-
+```
 psql -U postgres -c "CREATE DATABASE polytext"
 psql -U postgres -d polytext -f schema.sql
-
+```
 Start the backend:
 
 ```bash
