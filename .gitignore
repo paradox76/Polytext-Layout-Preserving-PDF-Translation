@@ -36,3 +36,4 @@ structure.txt
 git 
 "*.code-workspace" 
 Readme.txt 
+workspace.code-workspace 
