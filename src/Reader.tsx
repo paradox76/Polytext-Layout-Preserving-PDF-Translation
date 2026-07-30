@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import 'pdfjs-dist/web/pdf_viewer.css';
 
 import TranslateButton from "./TranslateButton";
+import { serverAddress } from "./App";
 
 
 //  let flipbookIndexonFlip=0;
@@ -80,7 +81,7 @@ function Reader() {
 
                 if (currentBook == null) {
 
-                    const pdf = await pdfjsLib.getDocument(`http://localhost:3001/books/${pat}`).promise;
+                    const pdf = await pdfjsLib.getDocument(serverAddress+`books/${pat}`).promise;
 
                     setCurrentBook(pdf);
 

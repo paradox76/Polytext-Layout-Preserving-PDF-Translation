@@ -1,3 +1,4 @@
+import { serverAddress } from "./App";
 
 function TranslateButton({ name, others, setTrans }) {
     let translatedBuffer: ArrayBuffer;
@@ -15,7 +16,7 @@ function TranslateButton({ name, others, setTrans }) {
 
         console.log(serviceChoice," and ", languageChoice,"\n",name," and others: ",others, ogLanguage);
         
-        fetch(`http://localhost:3001/api/translate/${others.pat}`,
+        fetch(serverAddress+`api/translate/${others.pat}`,
             {
                 method: 'POST',
                 headers: {

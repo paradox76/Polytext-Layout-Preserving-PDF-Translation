@@ -156,7 +156,7 @@ function SortButton({ setBook }) {
         console.log(params.toString());
 
         //param1=language&param2=en&sort=
-        const fetchRes = await fetch(serverAddress + "/filter?" + params.toString());
+        const fetchRes = await fetch(serverAddress + "filter?" + params.toString());
         const filteredBooks = await fetchRes.json();
         setBook(filteredBooks);
 
@@ -179,7 +179,7 @@ function SortButton({ setBook }) {
             </div>
             <button className="btn btn-primary btn-sm" style={{ borderRadius: "8px" }} onClick={filtersorter}>Go!</button>
             <button className="btn btn-sm" style={{ color: "oklch(0.65 0.02 255)", background: "transparent", border: "none" }} onClick={async () => {
-                const res = await fetch(serverAddress + "/api/books");
+                const res = await fetch(serverAddress + "api/books");
                 const books = await res.json();
                 setBook(books);
             }}>✕</button>

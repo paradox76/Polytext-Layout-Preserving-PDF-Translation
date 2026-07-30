@@ -29,7 +29,7 @@ const AccPage = () => {
 
     useEffect(() => {
 
-        const bookmarkList = fetch(serverAddress + "/api/bookmarks", {
+        const bookmarkList = fetch(serverAddress + "api/bookmarks", {
 
             method: "POST",
             body: JSON.stringify(authStatus),
@@ -121,7 +121,7 @@ const AccInfo = () => {
                                 e.preventDefault();
                                 const formdata = new FormData(e.target as HTMLFormElement);
                                 const username = formdata.get("username");
-                                const response = await fetch(serverAddress + "/api/user/username",
+                                const response = await fetch(serverAddress + "api/user/username",
                                     {
                                         method: 'POST',
                                         headers: {
@@ -192,7 +192,7 @@ function Uploader() {
         const formData = new FormData();
         formData.append("theUpload", payload);
 
-        const uploadRes = await fetch(serverAddress + "/books/upload", {
+        const uploadRes = await fetch(serverAddress + "books/upload", {
 
             method: "POST",
             body: formData
@@ -293,7 +293,7 @@ function BookMarkTab() {
 
         e.preventDefault();
         //console.log("for delete here: ", forDelete);
-        const delRes = fetch(serverAddress + "/api/book/delete", {
+        const delRes = fetch(serverAddress + "api/book/delete", {
 
             method: "POST",
             headers: { "Content-type": "application/json" },

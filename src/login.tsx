@@ -56,7 +56,7 @@ const Login = (propState: any) => {
 
         //here********************************************************************************
 
-        const response = await fetch(serverAddress + "/api/user/login/" + (isLogin ? "login" : "signup"), {
+        const response = await fetch(serverAddress + "api/user/login/" + (isLogin ? "login" : "signup"), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

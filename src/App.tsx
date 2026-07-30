@@ -63,7 +63,7 @@ function APP() {
 
 
     useEffect(() => {
-        responseback = fetch(serverAddress+"/api/books").then(res => res.json().then((data) => {
+        responseback = fetch(serverAddress+"api/books").then(res => res.json().then((data) => {
             console.log("the response from server: ", data);
             setBooks(data);
 
