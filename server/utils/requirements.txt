@@ -1,3 +1,4 @@
 langdetect==1.0.9
 PyPDF2==3.0.1
 six==1.17.0
+pdf2image 
