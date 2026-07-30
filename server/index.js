@@ -222,7 +222,7 @@ exp.get("/admin/processEverything", () => {
 exp.post("/books/upload", uploadLimiter ,multy.single("theUpload"), (req, res) => {
     // const testPath = "ANIMAL FARM BY GEORGE ORWELL.pdf";
     const pyScript = "./utils/bookJsonMaker.py";
-    const python = "C:/Users/User/Desktop/uni folder cover/Personal Project Works/Projects-and-experiments-3/server/utils/virtual_venv/Scripts/python.exe";
+    const python = process.env.PYTHON_PATH;
     const upFilePath = req.file.filename; // file.pdf
 
     execFile(python, [pyScript, upFilePath], (err, stdout, stderr) => {
