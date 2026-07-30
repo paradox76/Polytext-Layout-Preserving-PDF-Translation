@@ -59,7 +59,7 @@ def extractLangAuth(book, path):
 
 def thumber(file, folder):
      thumbfolder = os.path.join(folder, "thumbnail")
-     pic = convert_from_path(file, first_page=1, last_page=1, poppler_path= os.path.join(os.path.dirname(__file__),r"Release-24.08.0-0\poppler-24.08.0\Library\bin"))
+     pic = convert_from_path(file, first_page=1, last_page=1)
 
 
      picPath = os.path.join(thumbfolder,os.path.splitext((os.path.split(file)[-1]))[0]+".png").replace("\\","/")
