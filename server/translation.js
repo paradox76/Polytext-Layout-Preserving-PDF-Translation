@@ -47,21 +47,21 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
     switch (finalLang) {
         case 'pa':
-            fontFile = await fs.readFile('./server/fonts/NotoSerifGurmukhi-Regular.ttf');
+            fontFile = await fs.readFile('./fonts/NotoSerifGurmukhi-Regular.ttf');
             console.log('punjabi', fontFile.length);
             break;
         case 'fa':
         case 'pe':
         case 'ar':
         case 'ur':
-            fontFile = await fs.readFile('./server/fonts/NotoSansArabic-Regular.ttf')
+            fontFile = await fs.readFile('./fonts/NotoSansArabic-Regular.ttf')
             break;
         case 'hi':
-            fontFile = await fs.readFile('./server/fonts/TiroDevanagariHindi-Regular.ttf');
+            fontFile = await fs.readFile('./fonts/TiroDevanagariHindi-Regular.ttf');
             break;
 
         default:
-            fontFile = await fs.readFile('./server/fonts/NotoSans-Regular.ttf')
+            fontFile = await fs.readFile('./fonts/NotoSans-Regular.ttf')
             break;
     }
 
@@ -236,7 +236,7 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
     testDoc.addPage(page);
     const testFile = await testDoc.save();
-    await fs.writeFile('./server/testing/testingPage.pdf', testFile);
+    await fs.writeFile('./testing/testingPage.pdf', testFile);
 
     return testFile;
 
