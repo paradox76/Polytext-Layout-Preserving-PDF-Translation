@@ -63,7 +63,7 @@ function APP() {
 
 
     useEffect(() => {
-        responseback = fetch("http://localhost:3001/api/books").then(res => res.json().then((data) => {
+        responseback = fetch(serverAddress+"/api/books").then(res => res.json().then((data) => {
             console.log("the response from server: ", data);
             setBooks(data);
 
@@ -76,7 +76,7 @@ function APP() {
 
 
     cards = books.map((book) => (<CardCreator key={book.id} id={book.id} path={book.path} title={book.title}
-        language={book.language} thumbnail={"http://localhost:3001/" + book.thumbnail} author={book.author} >
+        language={book.language} thumbnail={serverAddress + book.thumbnail} author={book.author} >
 
     </CardCreator>));
 
