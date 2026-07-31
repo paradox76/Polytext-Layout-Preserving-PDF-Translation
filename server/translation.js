@@ -41,7 +41,7 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
     let { ogTextArray, trans, startCord, endCord, fontsize } = oldpack;
 
 
-    console.log("first Consoled from pdfmaker",ogTextArray, trans, startCord, endCord, fontsize);
+    console.log("first Consoled from pdfmaker", ogTextArray, trans, startCord, endCord, fontsize);
     console.log(ogTextArray.length, startCord.length, endCord.length, fontsize.length);
     let fontFile;
 
@@ -70,10 +70,10 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
     let newstartCord;
     let newendCord;
-    if (pageColor) { 
-        
-        newstartCord = startCord.map((e,i) => {
-            if (e === 0 || !e ) {
+    if (pageColor) {
+
+        newstartCord = startCord.map((e, i) => {
+            if (e === 0 || !e) {
                 return { x: 0, y: 0 };  // Or keep as 0 if you prefer
             }
             let x = e.x0 / dimsOCR.width * width;
@@ -83,8 +83,8 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
         });
 
 
-        newendCord = endCord.map((e,i) => {
-            if (typeof startCord[i] === 'number' ) return { x: 0, y: 0 };
+        newendCord = endCord.map((e, i) => {
+            if (typeof startCord[i] === 'number') return { x: 0, y: 0 };
             let x = e.x1 / dimsOCR.width * width;
             let y = (dimsOCR.height - e.y1) / dimsOCR.height * height;
 
@@ -98,50 +98,50 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
     }
 
-   // console.log(ogTextArray, trans, startCord, endCord, fontsize);
-   //console.log(ogTextArray.length, startCord.length, endCord.length, fontsize.length);
+    // console.log(ogTextArray, trans, startCord, endCord, fontsize);
+    //console.log(ogTextArray.length, startCord.length, endCord.length, fontsize.length);
 
 
 
 
-    if (pageColor) { 
+    if (pageColor) {
 
         let b = startCord.length;
-        for (let a = 0; a < b; a++) { 
+        for (let a = 0; a < b; a++) {
 
             const x = startCord[a].x; const y = endCord[a].y; let f = fontsize[a];
 
             if (f == 0) { f = 15; }
             const WIDTH = endCord[a].x - startCord[a].x;
             const yCordFix = 0.25 * f;
-            const HEIGHT = ((startCord[a].y - endCord[a].y) > fontsize[a] + yCordFix)?(startCord[a].y - endCord[a].y):(fontsize[a]+yCordFix);
+            const HEIGHT = ((startCord[a].y - endCord[a].y) > fontsize[a] + yCordFix) ? (startCord[a].y - endCord[a].y) : (fontsize[a] + yCordFix);
 
-            const str = trans[a];
-          
-         
+            let str = trans[a];
 
 
 
 
-            console.log("height is",HEIGHT);
+
+
+            console.log("height is", HEIGHT);
             page.drawRectangle({ x: x, y: y, width: WIDTH, height: HEIGHT, color: pageColor });
-          
-       //     page.drawText(str, { x: x, y: y+1.3*yCordFix, maxWidth: WIDTH, font: font, size: newf });
-          //  console.log(ogTextArray[a], "Width is: ", WIDTH, startCord[a], endCord[a]);
- 
+
+            //     page.drawText(str, { x: x, y: y+1.3*yCordFix, maxWidth: WIDTH, font: font, size: newf });
+            //  console.log(ogTextArray[a], "Width is: ", WIDTH, startCord[a], endCord[a]);
+
         }
 
 
 
-        
-        for (let a = 0; a < b; a++) { 
+
+        for (let a = 0; a < b; a++) {
 
             const x = startCord[a].x; const y = endCord[a].y; let f = fontsize[a];
 
             if (f == 0) { f = 15; }
             const WIDTH = endCord[a].x - startCord[a].x;
             const yCordFix = 0.25 * f;
-            const HEIGHT = ((startCord[a].y - endCord[a].y) > fontsize[a] + yCordFix)?(startCord[a].y - endCord[a].y):(fontsize[a]+yCordFix);
+            const HEIGHT = ((startCord[a].y - endCord[a].y) > fontsize[a] + yCordFix) ? (startCord[a].y - endCord[a].y) : (fontsize[a] + yCordFix);
 
             const str = trans[a];
             let transWidth;
@@ -164,20 +164,20 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
 
 
-           
-          //  page.drawRectangle({ x: x, y: y, width: WIDTH, height: HEIGHT, color: pageColor });
-            if (!str) { 
+
+            //  page.drawRectangle({ x: x, y: y, width: WIDTH, height: HEIGHT, color: pageColor });
+            if (!str) {
 
                 str = "?";
             }
-            page.drawText(str, { x: x, y: y+1.3*yCordFix, maxWidth: WIDTH, font: font, size: newf });
-          //  console.log(ogTextArray[a], "Width is: ", WIDTH, startCord[a], endCord[a]);
- 
+            page.drawText(str, { x: x, y: y + 1.3 * yCordFix, maxWidth: WIDTH, font: font, size: newf });
+            //  console.log(ogTextArray[a], "Width is: ", WIDTH, startCord[a], endCord[a]);
+
         }
 
 
 
-       
+
 
 
 
@@ -189,48 +189,48 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
         //this is for non-ocr/normal texts
         let b = startCord.length;
         console.log("b length is: ", b);
-  
-          for (let a = 0; a < b; a++) {
+
+        for (let a = 0; a < b; a++) {
             try {
-            const x = startCord[a].x; const y = startCord[a].y; let f = fontsize[a];
-            const WIDTH = (endCord[a].x - x);
-            if (WIDTH <= 0) continue;
-            const yCordFix = 0.25 * f;
+                const x = startCord[a].x; const y = startCord[a].y; let f = fontsize[a];
+                const WIDTH = (endCord[a].x - x);
+                if (WIDTH <= 0) continue;
+                const yCordFix = 0.25 * f;
 
                 const str = trans[a];
-                if (!str || str =="") continue;
+                if (!str || str == "") continue;
 
-            let transWidth;
-            let newf = f;
+                let transWidth;
+                let newf = f;
 
 
-            let flag = true;
+                let flag = true;
 
                 while (flag) {
-                   
-                transWidth = font.widthOfTextAtSize(str, newf);
-                if (transWidth >= WIDTH) {
 
-                    newf = WIDTH / (transWidth + 5) * newf;
+                    transWidth = font.widthOfTextAtSize(str, newf);
+                    if (transWidth >= WIDTH) {
 
-                } else {
-                    flag = false;
+                        newf = WIDTH / (transWidth + 5) * newf;
+
+                    } else {
+                        flag = false;
+                    }
                 }
-            }
 
 
 
-            page.drawRectangle({ x: x, y: y - yCordFix, width: WIDTH, height: f, color: rgb(1, 1, 1) });
-            page.drawText(str, { x: x, y: y, maxWidth: WIDTH, font: font, size: newf });
+                page.drawRectangle({ x: x, y: y - yCordFix, width: WIDTH, height: f, color: rgb(1, 1, 1) });
+                page.drawText(str, { x: x, y: y, maxWidth: WIDTH, font: font, size: newf });
                 //console.log("loop running" + a);
             } catch (error) {
-        
-          
+
+
                 console.error(error);
-            } 
-          }
-               
-  
+            }
+        }
+
+
     }
 
 
@@ -248,9 +248,11 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
 
 
-async function LLMCall(stringArray, finalLanguage, startCord, type) { 
+async function LLMCall(stringArray, finalLanguage, startCord, type) {
+// endCord passed as 'type' intentionally, any non"normal" value routes to OCR branch
+
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-    
+
     console.log("The llm function call is working", type);
     const CHUNK_SIZE = 15;
     const chunks = [];
@@ -260,7 +262,7 @@ async function LLMCall(stringArray, finalLanguage, startCord, type) {
 
     let translatedMap = {};
 
-        
+
     for (const startIdx of chunks) {
         const chunkArr = [];
         if (type == "normal") {
@@ -273,7 +275,7 @@ async function LLMCall(stringArray, finalLanguage, startCord, type) {
             }
 
         } else {
-           
+
             for (let i = startIdx; i < Math.min(startIdx + CHUNK_SIZE, stringArray.length); i++) {
                 chunkArr.push({
                     cord: `${startCord[i].x0},${startCord[i].y0}`,
@@ -282,14 +284,14 @@ async function LLMCall(stringArray, finalLanguage, startCord, type) {
             }
         }
 
-       // console.log("from llm func, chunkarray", chunkArr);
+        // console.log("from llm func, chunkarray", chunkArr);
         const response = await ai.models.generateContent({
             model: 'gemini-3.1-flash-lite-preview',
             contents: JSON.stringify(chunkArr),
             config: {
                 responseMimeType: "application/json",
-               systemInstruction: `You are a translation engine integrated into a PDF translation application. Your output is used directly to render translated text onto a PDF page, so structural accuracy is critical — any deviation from the required format will corrupt the output. You will receive a JSON array of objects, each with a "cord" field (coordinate string) and a "text" field (a line of text). These are consecutive lines from a book page. Read ALL lines first before translating any of them, then translate each line as if it were part of a naturally flowing paragraph rather than an isolated sentence. Some lines may end with a hyphen (-) indicating a word broken across lines — treat the hyphenated fragment and the continuation on the next line as one complete word for translation purposes, but still return them as separate elements. Return the EXACT same array with each object having an additional "translation" field containing the translated version of "text" in ${finalLanguage}. Never modify the "cord" or "text" fields. Never add, remove, or reorder any objects in the array. Translate each line exactly as provided without attempting to correct, interpret, or merge any garbled or unclear text.`
-           
+                systemInstruction: `You are a translation engine integrated into a PDF translation application. Your output is used directly to render translated text onto a PDF page, so structural accuracy is critical — any deviation from the required format will corrupt the output. You will receive a JSON array of objects, each with a "cord" field (coordinate string) and a "text" field (a line of text). These are consecutive lines from a book page. Read ALL lines first before translating any of them, then translate each line as if it were part of a naturally flowing paragraph rather than an isolated sentence. Some lines may end with a hyphen (-) indicating a word broken across lines — treat the hyphenated fragment and the continuation on the next line as one complete word for translation purposes, but still return them as separate elements. Return the EXACT same array with each object having an additional "translation" field containing the translated version of "text" in ${finalLanguage}. Never modify the "cord" or "text" fields. Never add, remove, or reorder any objects in the array. Translate each line exactly as provided without attempting to correct, interpret, or merge any garbled or unclear text.`
+
             }
         });
 
@@ -324,15 +326,15 @@ async function Translate(name, side, pgnum, pat, ogLanguage, finaLanguage, servi
 
     // now that we have page, its time to extract the coordinates and text, maybe first i should try to print some of the text
     const textContent = await pageFind.getTextContent();
-    console.log("Step 1: textcontent check? " , textContent.items.length);
+    console.log("Step 1: textcontent check? ", textContent.items.length);
 
     // console.log("Page content?", textContent);
     let newPage;
-    
+
 
     if (textContent.items.length == 0) {
 
-       let {cleanParas: trans, pageColor, fontsizeArr:fontsize, dimsOCR }  = await processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage);
+        let { cleanParas: trans, pageColor, fontsizeArr: fontsize, dimsOCR } = await processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage);
         //console.log(trans);
         let stringArray = trans.map((e, i) => e.line);
         let lang1 = ogLanguage.toLowerCase().substring(0, 2);
@@ -342,7 +344,7 @@ async function Translate(name, side, pgnum, pat, ogLanguage, finaLanguage, servi
 
         let response;
         //console.log("this is the stringarray: ", stringArray);
-    //    console.log(" logged from translate function: ", stringArray, startCord, endCord);
+        //    console.log(" logged from translate function: ", stringArray, startCord, endCord);
 
         console.log(service);
 
@@ -352,7 +354,7 @@ async function Translate(name, side, pgnum, pat, ogLanguage, finaLanguage, servi
 
             const llmResponse = await LLMCall(stringArray, finaLanguage, startCord, endCord);
             trans = startCord.map(c => llmResponse[`${c.x0},${c.y0}`]);
-        //    console.log(stringArray, trans);
+            //    console.log(stringArray, trans);
             console.log(stringArray.length, trans.length);
 
 
@@ -369,7 +371,7 @@ async function Translate(name, side, pgnum, pat, ogLanguage, finaLanguage, servi
                 response = await translate(stringArray, { autoCorrect: true, from: lang1, to: lang2 });
 
             }
-        
+
 
             trans = response.map((e, i) => e.text);
         }
@@ -402,16 +404,16 @@ async function Translate(name, side, pgnum, pat, ogLanguage, finaLanguage, servi
         let lang2 = finaLanguage.toLowerCase().substring(0, 2);
         let response;
         let trans = "";
-        
+
 
         if (service == "LLM(AI)") {
 
             const type = "normal";
-    
-            const llmResponse = await LLMCall(ogTextArray, finaLanguage, startCord,type);
+
+            const llmResponse = await LLMCall(ogTextArray, finaLanguage, startCord, type);
             trans = startCord.map(c => llmResponse[`${c.x},${c.y}`]);
-               // console.log(ogTextArray, trans);
-          //  console.log(ogTextArray.length, trans.length);
+            // console.log(ogTextArray, trans);
+            //  console.log(ogTextArray.length, trans.length);
 
 
 
@@ -472,6 +474,7 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
     const { data } = await sharp(pageImg).raw().toBuffer({ resolveWithObject: true });
     const dimsOCR = { width, height };
 
+
     let x1 = Math.ceil(0.05 * (width - 1));
     let x2 = width - x1;
     let x3 = x1;
@@ -530,7 +533,22 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
 
 
 
-    lang = ((ogLanguage == "Auto-detect") ? (await Tesseract.detect(pageImg)).data.script : ogLanguage).toLowerCase().substring(0, 3);
+    // lang = ((ogLanguage == "Auto-detect") ? (await Tesseract.detect(pageImg)).data.script : ogLanguage).toLowerCase().substring(0, 3);
+    const scriptMap = {
+        latin: 'eng', cyrillic: 'rus', devanagari: 'hin', arabic: 'ara',
+        gurmukhi: 'pan', han: 'chi_sim', japanese: 'jpn', korean: 'kor',
+        greek: 'ell', hebrew: 'heb', thai: 'tha', bengali: 'ben'
+    };
+
+    if (ogLanguage == "Auto-detect") {
+        const detected = ((await Tesseract.detect(pageImg)).data.script || '').toLowerCase();
+        lang = scriptMap[detected] || 'eng';
+    } else {
+        lang = ogLanguage.toLowerCase().substring(0, 3);
+    }
+
+
+
     tessWorker = await Tesseract.createWorker(lang, 1, {
         errorHandler: (error) => {
             console.error('Tesseract worker error:', error);
@@ -542,7 +560,7 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
     console.log(lang);
 
     ocrResult = await tessWorker.recognize(pageImg, {}, { blocks: true, text: true });
-  // console.log(ocrResult.data.blocks[0].paragraphs[0].lines);
+    // console.log(ocrResult.data.blocks[0].paragraphs[0].lines);
 
     const paras = ocrResult.data.blocks[0].paragraphs;
 
@@ -563,8 +581,8 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
     //console.log(cleanParas);
 
 
-   // console.log(cleanParas, "Font Sizes are: ", fontsizeArr);
-   // console.log(cleanParas.length, fontsizeArr.length);
+    // console.log(cleanParas, "Font Sizes are: ", fontsizeArr);
+    // console.log(cleanParas.length, fontsizeArr.length);
 
     await tessWorker.terminate();
 
@@ -576,7 +594,7 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
 
 function paraCleaner(uglyParalines) {
 
-    
+
 
     let emptyLines = 0;
     const allParaLines = [];
@@ -586,21 +604,22 @@ function paraCleaner(uglyParalines) {
     let firstLine = true;
     let fontsize = 0;
     let fontsizeArr = [];
-    
 
 
-//    console.log("Ugly para var is:", uglyParalines, "The parentPara var is:", parentPara);
-    for (const line of uglyParalines) { 
-       // console.log(line.text, line.confidence,'\n');
-        if (line.confidence >45 && line.text.length > 5) {
+
+    //    console.log("Ugly para var is:", uglyParalines, "The parentPara var is:", parentPara);
+    for (const line of uglyParalines) {
+        // console.log(line.text, line.confidence,'\n');
+        if (line.confidence > 45 && line.text.length > 5) {
             allParaLines.push({
                 startCords: { x0: line.bbox.x0, y0: line.bbox.y0 }, endCords: {
                     x1: line.bbox.x1,
-                    y1: (line.baseline.y1 > line.baseline.y0) ? (line.baseline.y1 + line.rowAttributes.descenders):(line.baseline.y0 + line.rowAttributes.descenders)},
-            line : line.text
+                    y1: (line.baseline.y1 > line.baseline.y0) ? (line.baseline.y1 + line.rowAttributes.descenders) : (line.baseline.y0 + line.rowAttributes.descenders)
+                },
+                line: line.text
             });
             fontsizeArr.push(line.rowAttributes.rowHeight - line.rowAttributes.descenders);
-            
+
 
         }
     }
@@ -617,102 +636,102 @@ function paraCleaner(uglyParalines) {
 
 
 }
-   /* const reseter = (empties) => {
+/* const reseter = (empties) => {
 
 
-        if (empties >= 2) {
-            endCords = { x1: maxX, y1: maxY };
-          //  endCords = { x1: curline.bbox.x1, y1: curline.bbox.y1 };
-            const pack = { startCords, endCords, cleanPara };
-            console.log("rhis ran", startCords, endCords);
-            cleanParas.push(pack);
-            emptyLines = 0;
-            startCords = 0;
-            cleanPara = "";
-            firstLine = true;
-            fontsizeArr.push(fontsize);
-            fontsize = 999999;
+     if (empties >= 2) {
+         endCords = { x1: maxX, y1: maxY };
+       //  endCords = { x1: curline.bbox.x1, y1: curline.bbox.y1 };
+         const pack = { startCords, endCords, cleanPara };
+         console.log("rhis ran", startCords, endCords);
+         cleanParas.push(pack);
+         emptyLines = 0;
+         startCords = 0;
+         cleanPara = "";
+         firstLine = true;
+         fontsizeArr.push(fontsize);
+         fontsize = 999999;
 
-            minX = Infinity;
-            maxX = -Infinity;
-            minY = Infinity;
-            maxY = -Infinity;
-
-
-        }
-
-    }
+         minX = Infinity;
+         maxX = -Infinity;
+         minY = Infinity;
+         maxY = -Infinity;
 
 
-    for (const e of uglyPara) {
+     }
 
-        minX = Math.min(minX, e.bbox.x0);
-        maxX = Math.max(maxX, e.bbox.x1);
-        minY = Math.min(minY, e.bbox.y0);
-        maxY = Math.max(maxY, e.bbox.y1);
+ }
 
 
-        const curCord = JSON.stringify(e.bbox);
-        const confidence = e.confidence;
-        let text = e.text;
-        fontsize =Math.min(fontsize, Math.abs(e.bbox.y1 - e.bbox.y0));
+ for (const e of uglyPara) {
 
-        curline = e;
-        if (firstLine) {
-
-            // startCords = { x0: e.bbox.x0, y0: e.bbox.y0 };
-            startCords = { x0: minX, y0: minY }; 
-            firstLine = false;
-        }
-
-        reseter(emptyLines);
-
-        if (confidence > 45 && (curCord != lastCord)) {
+     minX = Math.min(minX, e.bbox.x0);
+     maxX = Math.max(maxX, e.bbox.x1);
+     minY = Math.min(minY, e.bbox.y0);
+     maxY = Math.max(maxY, e.bbox.y1);
 
 
-            if (lastCord != 0 && ((JSON.parse(lastCord)).x0 > (JSON.parse(curCord).x0) + 15)) {
-                reseter(5);
-                minX = e.bbox.x0;
-                maxX = e.bbox.x1;
-                minY = e.bbox.y0;
-                maxY = e.bbox.y1;
-                startCords = { x0: minX, y0: minY };
-                firstLine = false;
-            }
-            cleanPara = cleanPara + text;
-            lastCord = curCord;
-        } else {
-            if (confidence <= 45 && curCord != lastCord) {
+     const curCord = JSON.stringify(e.bbox);
+     const confidence = e.confidence;
+     let text = e.text;
+     fontsize =Math.min(fontsize, Math.abs(e.bbox.y1 - e.bbox.y0));
+
+     curline = e;
+     if (firstLine) {
+
+         // startCords = { x0: e.bbox.x0, y0: e.bbox.y0 };
+         startCords = { x0: minX, y0: minY }; 
+         firstLine = false;
+     }
+
+     reseter(emptyLines);
+
+     if (confidence > 45 && (curCord != lastCord)) {
 
 
-
-                text = '\n';
-                cleanPara = cleanPara + text;
-                lastCord = curCord;
-
-
-            }
-
-
-        }
-
-        if (text == '\n') { emptyLines++; } else { emptyLines = 0; }
+         if (lastCord != 0 && ((JSON.parse(lastCord)).x0 > (JSON.parse(curCord).x0) + 15)) {
+             reseter(5);
+             minX = e.bbox.x0;
+             maxX = e.bbox.x1;
+             minY = e.bbox.y0;
+             maxY = e.bbox.y1;
+             startCords = { x0: minX, y0: minY };
+             firstLine = false;
+         }
+         cleanPara = cleanPara + text;
+         lastCord = curCord;
+     } else {
+         if (confidence <= 45 && curCord != lastCord) {
 
 
 
+             text = '\n';
+             cleanPara = cleanPara + text;
+             lastCord = curCord;
 
-    }
 
-    startCords = { x0: minX, y0: minY };
-    endCords = { x1: maxX, y1: maxY };
+         }
 
-  //  endCords = { x1: curline.bbox.x1, y1: curline.bbox.y1 };
-    console.log("rhis ran", startCords, endCords);
-    const pack = { startCords, endCords, cleanPara };
-    cleanParas.push(pack);
-    fontsizeArr.push(fontsize);
-    
-    }*/
+
+     }
+
+     if (text == '\n') { emptyLines++; } else { emptyLines = 0; }
+
+
+
+
+ }
+
+ startCords = { x0: minX, y0: minY };
+ endCords = { x1: maxX, y1: maxY };
+
+//  endCords = { x1: curline.bbox.x1, y1: curline.bbox.y1 };
+ console.log("rhis ran", startCords, endCords);
+ const pack = { startCords, endCords, cleanPara };
+ cleanParas.push(pack);
+ fontsizeArr.push(fontsize);
+ 
+ }*/
 
 
 
@@ -729,7 +748,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
 
     const text = textContent.items;
 
-   // console.log(text.slice(5));
+    // console.log(text.slice(5));
     //console.log(text);
     function lineMaker() {
         let line = "";
@@ -758,7 +777,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
             //  line = line + word.str;
 
 
-            if (firstWord ==  false && height < prevheight && line != '') {
+            if (firstWord == false && height < prevheight && line != '') {
                 // console.log('Height drop pushing:', line, 'at word:', word.str);
                 endCord.push({ x: lastword.transform[4] + lastword.width, y: lastword.transform[5] });
                 fontSize.push(lastword.transform[3]);
@@ -767,11 +786,11 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
                 firstWord = true;
                 totalwidth = 0;
 
- 
 
 
-            } else { 
-                if ((firstWord ==  false && lastword && Math.abs(transform[5] - lastword.transform[5]) > 2)) { 
+
+            } else {
+                if ((firstWord == false && lastword && Math.abs(transform[5] - lastword.transform[5]) > 2)) {
 
                     endCord.push({ x: lastword.transform[4] + lastword.width, y: lastword.transform[5] });
                     fontSize.push(lastword.transform[3]);
@@ -783,7 +802,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
             }
 
 
-                line = line + word.str;
+            line = line + word.str;
             if (firstWord) {
                 //    console.log('Pushing startCord for word:', word.str);
                 startCord.push({ x: transform[4], y: transform[5] });
@@ -794,8 +813,8 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
 
             }
 
-      
-            if (word.hasEOL == true ) {
+
+            if (word.hasEOL == true) {
                 //    console.log('hasEOL pushing:', line, 'at word:', word.str);
                 endCord.push({ x: transform[4] + width, y: transform[5] });
                 fontSize.push(height);
@@ -814,7 +833,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
             lastword = word;
         }
 
-   
+
         if (word.hasEOL == false && line !== '') {
             endCord.push({ x: transform[4] + width, y: transform[5] });
             fontSize.push(height);
@@ -823,7 +842,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
 
         }
 
-      (  { page, startCord, endCord, fontSize }  = emptyLineRemover( page, startCord, endCord, fontSize));
+        ({ page, startCord, endCord, fontSize } = emptyLineRemover(page, startCord, endCord, fontSize));
 
 
         return { page, startCord, endCord, fontSize };
@@ -831,7 +850,7 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
 
 
     const pageText = lineMaker();
-   // console.log("consoled from pronormtext",pageText.page, pageText.startCord, pageText.endCord, pageText.fontSize);
+    // console.log("consoled from pronormtext",pageText.page, pageText.startCord, pageText.endCord, pageText.fontSize);
     //console.log(pageText.page.length, pageText.startCord.length, pageText.endCord.length, pageText.fontSize.length);
 
     return pageText;
@@ -839,23 +858,23 @@ async function processNormText(bookName, pageSide, pageNumber, fullPath, oglangu
 
 }
 
-function emptyLineRemover( page, startCord, endCord, fontSize) { 
+function emptyLineRemover(page, startCord, endCord, fontSize) {
 
     let emptyIdx = [];
-    page.map((e,i) => { 
+    page.map((e, i) => {
 
-        if (e == '') { 
+        if (e == '') {
             emptyIdx.push(i);
         }
 
     });
-   
-    emptyIdx.reverse().map((e,i) => { 
 
-        page.splice(e,1);
+    emptyIdx.reverse().map((e, i) => {
+
+        page.splice(e, 1);
         startCord.splice(e, 1);
         endCord.splice(e, 1);
-        fontSize.splice(e,1);
+        fontSize.splice(e, 1);
 
     });
 
@@ -865,24 +884,31 @@ function emptyLineRemover( page, startCord, endCord, fontSize) {
 }
 
 transRoute.post('/:bookPath', async (req, res) => {
+    try {
+        const bookName = req.params.bookPath;
+        const info = req.body;
+        const pageSide = info.name;
+        const pageNumber = info.others.currentPage;
+        const fullPath = info.others.pat;
+        const service = info.serviceChoice;
 
-    const bookName = req.params.bookPath;
-    const info = req.body;
-    const pageSide = info.name;
-    const pageNumber = info.others.currentPage;
-    const fullPath = info.others.pat;
-    const service = info.serviceChoice;
+        const oglanguage = req.body.ogLanguage;
+        const finaLanguage = req.body.languageChoice;
 
-    const oglanguage = req.body.ogLanguage;
-    const finaLanguage = req.body.languageChoice;
+        const Translated = await Translate(bookName, pageSide, pageNumber, fullPath, oglanguage, finaLanguage, service);
 
-    const Translated = await Translate(bookName, pageSide, pageNumber, fullPath, oglanguage, finaLanguage, service);
+        // console.log(translated);
 
-    // console.log(translated);
-    
-    res.type('pdf');
-    res.send(Translated);
-    
+        res.type('pdf');
+        res.send(Translated);
 
-    res.end();
+
+        res.end();
+    } catch {
+        
+        console.error("Translation failed:", error);
+        res.status(500).json({ error: "Translation failed" });
+
+
+    }
 })

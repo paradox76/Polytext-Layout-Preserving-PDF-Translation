@@ -48,7 +48,7 @@ function Reader() {
         useEffect(() => {
 
             if (transPage.transVisible) {
-                console.log("visible? ", transPage.transVisible, viewport.current);
+             //   console.log("visible? ", transPage.transVisible, viewport.current);
                 replacePage();
 
 
@@ -143,16 +143,23 @@ function Reader() {
         async function replacePage() {
             try {
 
-                console.log("Buffer recieved is: ", transPage.translatedBuffer);
+            //    console.log("Buffer recieved is: ", transPage.translatedBuffer);
                 const bufferCopy = transPage.translatedBuffer.slice(0);
                 const trans1 = pdfjsLib.getDocument(bufferCopy);
 
                 let tempPage = await (await trans1.promise).getPage(1);
+                
+                const transViewport = tempPage.getViewport({ scale: 1.5 });
+
                 const transCanvas = document.createElement("canvas");
-                transCanvas.width = viewport.current.width;
-                transCanvas.height = viewport.current.height;
-                console.log("width is :", transCanvas.width);
-                await tempPage.render({ canvas: transCanvas, viewport: viewport.current }).promise;
+            //    transCanvas.width = viewport.current.width;
+                //    transCanvas.height = viewport.current.height;
+                transCanvas.width = transViewport.width;
+                transCanvas.height = transViewport.height;
+                
+             //   console.log("width is :", transCanvas.width);
+                //await tempPage.render({ canvas: transCanvas, viewport: viewport.current }).promise;
+                await tempPage.render({ canvas: transCanvas, viewport: transViewport }).promise;
                 tempPage.cleanup();
 
                 if (transPage.side == "left") {
@@ -160,10 +167,10 @@ function Reader() {
                     canvases[currentPage + 1] = { canvas: transCanvas, pageNum: canvases[currentPage + 1].pageNum, temp: true };
                     const tempCan = [...canvases];
 
-                    console.log(transCanvas.baseURI);
+                  //  console.log(transCanvas.baseURI);
 
                     setCanvases(tempCan);
-                    console.log("from replacepage",canvases);
+                 //   console.log("from replacepage",canvases);
 
                 }
                 else { 
@@ -192,16 +199,17 @@ function Reader() {
 
 
 
-        if (loading) {
+        // if (loading) {
+        //     return <div>Loading PDF...</div>;
+        // }
+        if (loading || !viewport.current) {
             return <div>Loading PDF...</div>;
         }
 
 
-        //  console.log("Number of pages:", canvases.length);
-        // console.log("Pages array:", canvases, "Current page is : ", currentPage);
+   
         console.log("Current page is : ", currentPage);
-        //  console.log("Cache array is: ",pageCache);
-
+       
 
 
         return (
@@ -215,18 +223,18 @@ function Reader() {
                         </TranslateButton></div>
 
                     <HTMLFlipBook
-                        //pageNum ={currentPage['pdfPage']-1}
+                      
                         startPage={0}
 
-                        // ref={flipbookRef}
-                        width={(viewport.current) ? (viewport.current.width) : (60)}
-                        height={(viewport.current) ? (viewport.current.height) : 80}
+                       
+                       width={(viewport.current) ? (viewport.current.width) : (60)}
+                         height={(viewport.current) ? (viewport.current.height) : 80}
+                        // width={viewport.current.width}
+                        // height={viewport.current.height}
                         maxWidth={'100%'}
 
                         onFlip={(e: any) => {
-                            //   console.log("Page flipped to:", e.data,"to Real pdf page: ",canvases[e.data].pageNum);
-                            //   console.log(e);
-                            //  flipbookIndexonFlip =e.data;
+                          
                             setCurrentPage(e.data + 1);
                         }}
 
