@@ -2,7 +2,7 @@ import express from 'express';
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 import fs from 'fs/promises';
 import path from 'path';
-import { readFile, writeFile } from 'fs';
+
 
 import Tesseract from 'tesseract.js';
 import { pdf as pdftoimg } from 'pdf-to-img';
@@ -10,12 +10,18 @@ import { pdf as pdftoimg } from 'pdf-to-img';
 import translate from 'google-translate-api-x';
 import { PDFDocument, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
-import { compareSync } from 'bcrypt';
+
 import sharp from 'sharp';
-import { start } from 'repl';
+
 import { GoogleGenAI } from '@google/genai';
 
 
+const googleToTesseract = {
+    'en': 'eng', 'pa': 'pan', 'hi': 'hin', 'ar': 'ara', 'ur': 'urd',
+    'mr': 'mar', 'ne': 'nep', 'sa': 'san', 'fr': 'fra', 'es': 'spa',
+    'de': 'deu', 'pt': 'por', 'it': 'ita', 'nl': 'nld', 'pl': 'pol',
+    'sv': 'swe', 'tr': 'tur', 'ro': 'ron','ru': 'rus'
+};
 
 const SCALE = 7;
 
@@ -74,7 +80,7 @@ const pdfPageMaker = async (buffer, pgnum, finalLang, oldpack, pageColor, dimsOC
 
         newstartCord = startCord.map((e, i) => {
             if (e === 0 || !e) {
-                return { x: 0, y: 0 };  // Or keep as 0 if you prefer
+                return { x: 0, y: 0 };  
             }
             let x = e.x0 / dimsOCR.width * width;
             let y = (dimsOCR.height - e.y0) / dimsOCR.height * height;
@@ -549,7 +555,7 @@ async function processOCRText(name, side, pgnum, pat, ogLanguage, finaLanguage) 
 
 
 
-    tessWorker = await Tesseract.createWorker(lang, 1, {
+    tessWorker = await Tesseract.createWorker(googleToTesseract[lang], 1, {
         errorHandler: (error) => {
             console.error('Tesseract worker error:', error);
         }

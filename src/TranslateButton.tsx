@@ -51,7 +51,7 @@ function TranslateButton({ name, others, setTrans }) {
             <select name="Translator" id={"trans"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required>
                 <optgroup label = "Service to use:">
                 <option>Google</option>
-                <option>LLM(AI)</option>
+                <option selected>LLM(AI)</option>
                 </optgroup>
                 </select>
                 Translate
@@ -75,7 +75,9 @@ function TranslateButton({ name, others, setTrans }) {
                 <option value="pl">Polish</option>
                 <option value="sv">Swedish</option>
                 <option value="tr">Turkish</option>
-                <option value="ro">Romanian</option>
+                    <option value="ro">Romanian</option>
+                    <option value="ru">Russian</option>
+
                 </optgroup>
                 </select>    
             <select name="To Language" id ={"lang"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required defaultValue="pa">
@@ -98,7 +100,8 @@ function TranslateButton({ name, others, setTrans }) {
                 <option value="pl">Polish</option>
                 <option value="sv">Swedish</option>
                 <option value="tr">Turkish</option>
-                <option value="ro">Romanian</option>
+                    <option value="ro">Romanian</option>
+                    <option value="ru">Russian</option>
                 </optgroup>
                 </select>
             </button>
