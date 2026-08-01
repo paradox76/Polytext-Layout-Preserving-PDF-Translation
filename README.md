@@ -32,7 +32,7 @@ Polytext is a full-stack web platform for reading and translating PDF books. Ope
 ## Architecture Highlights
 
 - **Dual processing pipelines** — one for text-based PDFs (PDF.js coordinate extraction), one for scanned documents (Tesseract OCR with pixel-to-point coordinate conversion) — unified behind a single translation flow
-- **Coordinate-preserving translation** — original text is covered with rectangles colour-matched to the page background, and translated text is redrawn at the same coordinates with dynamic font scaling
+- **Coordinate-preserving translation** —  translated text is redrawn at the same coordinates with dynamic font scaling
 - **Structured LLM translation** — each line is sent as a positioned object so translations map back to exact coordinates while retaining surrounding context for coherent, continuous output
 - **Sliding-window canvas caching** — only pages near the current position are rendered and cached, bounding memory regardless of book length
 - **Node.js and Python interoperability** — Python handles document analysis, language detection, and thumbnail generation via child processes
