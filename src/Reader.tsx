@@ -6,6 +6,7 @@ import 'pdfjs-dist/web/pdf_viewer.css';
 
 import TranslateButton from "./TranslateButton";
 import { serverAddress } from "./App";
+import Loader from "./Loader";
 
 
 //  let flipbookIndexonFlip=0;
@@ -21,6 +22,7 @@ function Reader() {
         const [pageCache, setPageCache] = useState<any>({});
         const [currentBook, setCurrentBook] = useState<any>(null);
         const [transPage, setTransPage] = useState<any>({ transVisible: false });
+        
 
         const viewport = useRef<any>();
         const ogHeldCanvas = useRef<any>();
@@ -203,7 +205,11 @@ function Reader() {
         //     return <div>Loading PDF...</div>;
         // }
         if (loading || !viewport.current) {
-            return <div>Loading PDF...</div>;
+            return (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+                    <Loader variant="inline" show={true} />
+                </div>
+            );
         }
 
 

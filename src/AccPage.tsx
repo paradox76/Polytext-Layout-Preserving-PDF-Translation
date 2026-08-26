@@ -170,6 +170,7 @@ const AccInfo = () => {
 function Uploader() {
     // const { authStatus, setauthStatus } = useContext(authContext);
     const [uploadMsg, setuploadMsg] = useState({ isVisible: false, Message: "" });
+    const [isUploading, setIsUploading] = useState(false);
 
     let payload: File;
     async function uplaodHandler(event: any) {
@@ -192,23 +193,22 @@ function Uploader() {
         const formData = new FormData();
         formData.append("theUpload", payload);
 
-        const uploadRes = await fetch(serverAddress + "books/upload", {
-
-            method: "POST",
-            body: formData
-
-        });
-        if (!(uploadRes.ok)) {
-            setuploadMsg({ isVisible: true, Message: "There seems to be an internal error" });
-            return;
-
+        setIsUploading(true);
+        try {
+            const uploadRes = await fetch(serverAddress + "books/upload", {
+                method: "POST",
+                body: formData
+            });
+            if (!(uploadRes.ok)) {
+                setuploadMsg({ isVisible: true, Message: "There seems to be an internal error" });
+                return;
+            }
+            const parsedRes = await uploadRes.text();
+            setuploadMsg({ isVisible: true, Message: parsedRes });
+            return parsedRes;
+        } finally {
+            setIsUploading(false);
         }
-
-        const parsedRes = await uploadRes.text();
-        setuploadMsg({ isVisible: true, Message: parsedRes });
-
-        return parsedRes;
-
 
 
 

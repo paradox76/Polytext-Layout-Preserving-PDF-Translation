@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { serverAddress } from "./App";
+import Loader from "./Loader";
 
 function TranslateButton({ name, others, setTrans }) {
+
+    const [isTranslating, setIsTranslating] = useState(false);
+
     let translatedBuffer: ArrayBuffer;
     const transReqtoBack = ()=>{
 
@@ -14,7 +19,8 @@ function TranslateButton({ name, others, setTrans }) {
             return;
         }
 
-        console.log(serviceChoice," and ", languageChoice,"\n",name," and others: ",others, ogLanguage);
+        console.log(serviceChoice, " and ", languageChoice, "\n", name, " and others: ", others, ogLanguage);
+        setIsTranslating(true);
         
         fetch(serverAddress+`api/translate/${others.pat}`,
             {
@@ -38,15 +44,21 @@ function TranslateButton({ name, others, setTrans }) {
         }).then(
             () => {
                 console.log("buffer is : ", translatedBuffer);
-                setTrans({ translatedBuffer, currentPage: others.currentPage, transVisible: true, side: name })
+                setTrans({ translatedBuffer, currentPage: others.currentPage, transVisible: true, side: name });
+                setIsTranslating(false);
+            }).catch((err) => {
+                console.error("Translation failed:", err);
+                setIsTranslating(false);
             });
 
 
    
 
     };
-    return(<>
-
+    return (<>
+        
+        <Loader variant="overlay" show={isTranslating} />
+        
         <button onClick={transReqtoBack}> 
             <select name="Translator" id={"trans"+name} style={{width: '20px'}} onClick={(e)=>{e.stopPropagation();}} required>
                 <optgroup label = "Service to use:">

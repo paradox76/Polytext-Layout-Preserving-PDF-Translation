@@ -1,7 +1,7 @@
 import { useEffect, useState, createContext } from "react";
 import 'bootstrap';
 import { TopNavBar, CardCreator, Footer, SortButton } from "./components";
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Reader from "./Reader.tsx";
 import Login from "./login.tsx";
 import AccPage, { AccInfo, BookMarkTab, Uploader } from "./AccPage.tsx";
@@ -37,7 +37,7 @@ function APP() {
         } else { return; }
         document.body.style.paddingTop = `${size}px`;
         document.documentElement.style.setProperty('--navH', `${size}px`);
-      
+
         //   console.log("navsize is: "+ size);
 
     };
@@ -63,7 +63,7 @@ function APP() {
 
 
     useEffect(() => {
-        responseback = fetch(serverAddress+"api/books").then(res => res.json().then((data) => {
+        responseback = fetch(serverAddress + "api/books").then(res => res.json().then((data) => {
             console.log("the response from server: ", data);
             setBooks(data);
 
@@ -104,40 +104,44 @@ function APP() {
 
     return (
         <>
-            <div className="d-flex flex-column" style={{minHeight: "calc(100vh - var(--navH))"}}>
-            <authContext.Provider value={{ authStatus, setauthStatus }}>
+            <div className="d-flex flex-column" style={{ minHeight: "calc(100vh - var(--navH))" }}>
+                <div style={{ background: "oklch(0.66 0.13 195)", color: "oklch(0.15 0.02 255)", padding: "6px 16px", fontSize: "0.85rem", fontWeight: 500, textAlign: "center" }}>
+                    Main Feature: Translate any page while preserving its original layout → ① Open a book → ② Select language & service → ③ Hit Translate
+                </div>
 
-            <TopNavBar onClicklogin={() => { setlogin(true); }}  books={books} setBooks={setBooks} >     </TopNavBar>
-            <LoginContext.Provider value={openLogin} >
+                <authContext.Provider value={{ authStatus, setauthStatus }}>
 
-                <Login closeLogin={() => { setlogin(false); }} key={openLogin ? 'open' : 'closed'}></Login>
+                    <TopNavBar onClicklogin={() => { setlogin(true); }} books={books} setBooks={setBooks} >     </TopNavBar>
+                    <LoginContext.Provider value={openLogin} >
 
-            </LoginContext.Provider>
+                        <Login closeLogin={() => { setlogin(false); }} key={openLogin ? 'open' : 'closed'}></Login>
+
+                    </LoginContext.Provider>
 
 
-            
-            <Routes>
-                <Route path="/read/books/:pat" element={<Reader />}></Route>
-                <Route path="/" element={
 
-                    <div className="row px-4 g-4 justify-content-center">
-                                                
+                    <Routes>
+                        <Route path="/read/books/:pat" element={<Reader />}></Route>
+                        <Route path="/" element={
 
-                        <SortButton setBook={setBooks}></SortButton>
-                        {cards}
+                            <div className="row px-4 g-4 justify-content-center">
 
-                    </div>}>
-                            </Route>
-                            
 
-                {authRoutes}
+                                <SortButton setBook={setBooks}></SortButton>
+                                {cards}
 
-                        </Routes>
-                        
-        </authContext.Provider>
+                            </div>}>
+                        </Route>
+
+
+                        {authRoutes}
+
+                    </Routes>
+
+                </authContext.Provider>
 
                 <Footer></Footer>
-                </div>
+            </div>
         </>
 
     );
