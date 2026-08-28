@@ -132,7 +132,7 @@ const Footer = () => {
                     <span className="small" style={{color: "oklch(0.55 0.02 255)"}}>© 2026 Polytext</span>
                     <span>
                         <a href="#" className="text-decoration-none me-3" style={{color: "oklch(0.65 0.02 255)"}}>Contact</a>
-                        <a href="#" className="text-decoration-none" style={{color: "oklch(0.65 0.02 255)"}}>GitHub</a>
+                        <a href="https://github.com/paradox76" className="text-decoration-none" style={{color: "oklch(0.65 0.02 255)"}}>GitHub</a>
                     </span>
                 </div>
             </footer>
