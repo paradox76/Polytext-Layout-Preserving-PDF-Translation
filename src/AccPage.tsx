@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 import { authContext, serverAddress } from "./App";
-
+import Loader from "./Loader";
 
 let lastMenu: any = null;
 
@@ -168,7 +168,6 @@ const AccInfo = () => {
 }
 
 function Uploader() {
-    // const { authStatus, setauthStatus } = useContext(authContext);
     const [uploadMsg, setuploadMsg] = useState({ isVisible: false, Message: "" });
     const [isUploading, setIsUploading] = useState(false);
 
@@ -180,11 +179,8 @@ function Uploader() {
             return;
         }
         if (payload.type !== "application/pdf") {
-
-
             return;
         }
-
         if (payload.size >= 31457280) {
             setuploadMsg({ isVisible: true, Message: "File size should be below 30 MB" });
             return;
@@ -209,20 +205,13 @@ function Uploader() {
         } finally {
             setIsUploading(false);
         }
-
-
-
-
     }
 
     return <>
+        <Loader variant="overlay" show={isUploading} />
         <input id="uploader" type="file" accept="application/pdf" onChange={(e) => {
             const files = e.target.files;
             payload = files[0];
-
-
-
-
         }}></input>
 
         <div style={{
@@ -230,21 +219,14 @@ function Uploader() {
             color: "GrayText", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center",
             fontSize: "3vw", userSelect: "none", cursor: "pointer"
         }}
-
             onDragOver={(e) => { e.preventDefault(); }}
             onDrop={(e) => {
                 e.preventDefault();
                 const files = e.dataTransfer.files;
                 if (files[0].type === "application/pdf" && files.length < 2 && files[0].size < 31457280) {
-
                     const textSpan = e.currentTarget.querySelector('span');
                     textSpan.innerText = files[0].name;
-
                     payload = files[0];
-
-
-
-
                 }
             }}
         >
@@ -252,10 +234,7 @@ function Uploader() {
         </div>
         <button className="btn btn-primary w-50 d-block mx-auto mt-3" onClick={uplaodHandler}> Submit</button>
         <div style={{ color: "red", visibility: (uploadMsg.isVisible) ? "visible" : "hidden", textAlign: "center", marginTop: "8px" }}> {uploadMsg.Message}</div>
-
     </>
-
-
 }
 
 
