@@ -176,8 +176,15 @@ function Reader() {
 
                 }
                 else { 
-                    ogHeldCanvas.current = canvases[currentPage];
-                    canvases[currentPage] = { canvas: transCanvas, pageNum: canvases[currentPage].pageNum };
+                    if (currentPage == 0) {
+                        ogHeldCanvas.current = canvases[currentPage + 1];
+                        canvases[currentPage + 1] = { canvas: transCanvas, pageNum: canvases[currentPage + 1].pageNum, temp: true };
+
+
+                    } else {
+                        ogHeldCanvas.current = canvases[currentPage];
+                        canvases[currentPage] = { canvas: transCanvas, pageNum: canvases[currentPage].pageNum };
+                    }
                     const tempCan = [...canvases];
                     setCanvases(tempCan);
 
@@ -268,6 +275,7 @@ function Reader() {
                             maxPageTextureSize: 0,
                             showPageCorners: true,
                             disableFlipByClick: true,
+                            
 
 
 
