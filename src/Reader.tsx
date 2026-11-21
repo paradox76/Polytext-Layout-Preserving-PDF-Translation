@@ -250,11 +250,12 @@ function Reader() {
                           
                             setCurrentPage(e.data + 1);
                         }}
+                    
 
-
+                        
                         {...({
 
-
+                            
                             size: "fixed",
                             minWidth: 315,
                             maxWidth: 1000,
@@ -269,12 +270,13 @@ function Reader() {
 
                             drawShadow: true,
                             flippingTime: 1000,
-                            usePortrait: true,
+                            usePortrait: false,
                             startZIndex: 0,
                             autoSize: false,
                             maxPageTextureSize: 0,
                             showPageCorners: true,
                             disableFlipByClick: true,
+                              
                             
 
 
