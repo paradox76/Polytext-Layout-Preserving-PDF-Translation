@@ -276,6 +276,7 @@ function Reader() {
                             maxPageTextureSize: 0,
                             showPageCorners: true,
                             disableFlipByClick: true,
+                            swipeDistance: 15
                               
                             
 
