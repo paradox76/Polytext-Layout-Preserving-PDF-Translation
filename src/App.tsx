@@ -105,8 +105,8 @@ function APP() {
     return (
         <>
             <div className="d-flex flex-column" style={{ minHeight: "calc(100vh - var(--navH))" }}>
-                <div style={{ background: "oklch(0.66 0.13 195)", color: "oklch(0.15 0.02 255)", padding: "6px 16px", fontSize: "0.85rem", fontWeight: 500, textAlign: "center" }}>
-                    Main Feature: Translate any page while preserving its original layout → ① Open a book → ② Select language & service → ③ Hit Translate
+                <div style={{  background: "oklch(0.66 0.13 195)", color: "red", padding: "6px 16px", fontSize: "0.85rem", fontWeight: 500, textAlign: "center" }}>
+                (Best viewed on a Computer) Main Feature: Translate any page while preserving its original layout → ① Open a book → ② Select language & service → ③ Hit Translate
                 </div>
 
                 <authContext.Provider value={{ authStatus, setauthStatus }}>

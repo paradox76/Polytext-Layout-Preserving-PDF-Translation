@@ -270,7 +270,7 @@ function Reader() {
 
                             drawShadow: true,
                             flippingTime: 1000,
-                            usePortrait: false,
+                            usePortrait: true,
                             startZIndex: 0,
                             autoSize: false,
                             maxPageTextureSize: 0,
